@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Livre } from '../model/livre.model';
 import { LivreService } from '../service/livre.service';
+import { Genre } from '../model/genre.model';
 @Component({
   selector: 'app-livres',
   templateUrl: './livres.component.html',
