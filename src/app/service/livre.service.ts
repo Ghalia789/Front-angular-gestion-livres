@@ -35,8 +35,31 @@ export class LivreService {
     return this.livre;
   }
 
-  updateLivre(liv:Livre){
-    this.supprimerLivre(liv);
-    this.ajouterLivre(liv);
+  trierLivres() {
+    this.livres = this.livres.sort((liv1, liv2) => {
+      if (liv1.idLivre && liv2.idLivre) {
+        if (liv1.idLivre > liv2.idLivre) {
+          return 1;
+        }
+        if (liv1.idLivre < liv2.idLivre) {
+          return -1;
+        }
+      }
+      return 0;
+    });
   }
+
+
+  updateLivre(liv:Livre){
+    //this.supprimerLivre(liv);
+    //this.ajouterLivre(liv);
+    //this.trierLivres();
+    const index = this.livres.findIndex(l => l.idLivre === liv.idLivre);
+    if (index > -1) {
+      this.livres[index] = liv;
+      this.trierLivres();
+    }
+  }
+
+
 }

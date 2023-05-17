@@ -20,6 +20,7 @@ export class LivresComponent implements OnInit {
     let conf =confirm("Etes-vous sûr ?");
     if(conf){
     this.livreService.supprimerLivre(liv);
+    }
   }
-}
+
 }
