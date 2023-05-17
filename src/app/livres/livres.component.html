@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <table class="table table-striped">
+        <tr>
+          <th>Id</th>
+          <th>Titre</th>
+          <th>Auteur</th>
+          <th>Prix</th>
+          <th>Quantite en stock</th>
+          <th>Date de Publication</th>
+        </tr>
+        <tbody *ngFor="let livre of livres">
+          <tr>
+            <td>{{livre.idLivre}}</td>
+            <td>{{livre.titreLivre}}</td>
+            <td>{{livre.auteurLivre}}</td>
+            <td>{{livre.prixLivre}}</td>
+            <td>{{livre.quantiteStock}}</td>
+            <td>{{livre.datePublication| date:'dd/MM/yyyy'}}</td>
+            <td>
+              <a class="btn btn-danger" (click)="supprimerLivre(livre)">Supprimer</a>
+            </td>
+            <td>
+              <a class="btn btn-success" [routerLink]="['/updateLivre',livre.idLivre]">Modifier</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
