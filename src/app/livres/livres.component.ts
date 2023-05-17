@@ -10,18 +10,32 @@ import { Genre } from '../model/genre.model';
 export class LivresComponent implements OnInit {
 
 
-  livres: Livre[];
+  livres?: Livre[];//tableau de livres
   constructor(private livreService: LivreService) {
-    this.livres = livreService.listeLivres();
+    //this.livres = livreService.listeLivre();
   }
 
   ngOnInit(): void {
+    this.chargerLivres();
   }
-  supprimerLivre(liv: Livre) {
-    let conf =confirm("Etes-vous sûr ?");
-    if(conf){
-    this.livreService.supprimerLivre(liv);
+  chargerLivres(){
+    this.livreService.listeLivre().subscribe(livs => {
+      console.log(livs);
+      this.livres = livs;
+      });
+  }
+
+  supprimerLivre(l: Livre) {
+    if (l.idLivre !== undefined) {
+      let conf = confirm("Etes-vous sûr ?");
+      if (conf) {
+        this.livreService.supprimerLivre(l.idLivre).subscribe(() => {
+          console.log("livre supprimé");
+          this.chargerLivres();
+        });
+      }
     }
   }
+
 
 }

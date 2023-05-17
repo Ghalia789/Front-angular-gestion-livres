@@ -7,7 +7,7 @@ import { LivresComponent } from './livres/livres.component';
 import { AddLivreComponent } from './add-livre/add-livre.component';
 import { UpdateLivreComponent } from './update-livre/update-livre.component';
 import { LivreService } from './service/livre.service';
-
+import {HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +18,8 @@ import { LivreService } from './service/livre.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [LivreService],
   bootstrap: [AppComponent]

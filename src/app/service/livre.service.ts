@@ -1,11 +1,98 @@
 import { Injectable } from '@angular/core';
 import { Livre } from '../model/livre.model';
 import { Genre } from '../model/genre.model';
+import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+const httpOptions = {
+headers: new HttpHeaders( {'Content-Type': 'application/json'} )
+};
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class LivreService {
+  apiURL: string = 'http://localhost:8080/livres/api';
+  livres : Livre[]; //un tableau de Livres
+  //livre! : Livre;
+
+  constructor(private http : HttpClient) {
+
+    /*this.genres =[{idGen: 1, dateCreation:new Date("05/17/2023"), nomGen: "Romance"},
+    {idGen: 2, dateCreation:new Date("05/17/2023"), nomGen: "Mystere"}]*/
+    this.livres =  [
+      {idLivre : 1, auteurLivre : "Victor Hugo",  datePublication : new Date("01/14/1818"), prixLivre:10, quantiteStock:60, titreLivre:"Cosette", genre:{idGen: 1, dateCreation:new Date("05/17/2023"), nomGen: "Romance"}},
+      {idLivre : 2, auteurLivre : "Victor Hugo",  datePublication : new Date("01/14/1819"), prixLivre:9, quantiteStock:50, titreLivre:"Cosette", genre:{idGen: 1, dateCreation:new Date("05/17/2023"), nomGen: "Romance"}},
+      {idLivre : 3, auteurLivre : "Marie Higgins Clark",datePublication : new Date("12/01/2010"), prixLivre:44, quantiteStock:100, titreLivre:"Pretend you don't see her", genre:{idGen: 2, dateCreation:new Date("05/17/2023"), nomGen: "Mystere"}},
+      ];
+      //this.livre = new Livre(); // Initialize the livre property with an empty instance
+
+  }
+
+  listeLivre(): Observable<Livre[]>{
+    return this.http.get<Livre[]>(this.apiURL);
+    }
+
+    ajouterLivre( liv: Livre):Observable<Livre>{
+      return this.http.post<Livre>(this.apiURL, liv, httpOptions);
+      }
+
+      supprimerLivre(id : number) {
+        const url = `${this.apiURL}/${id}`;
+        return this.http.delete(url, httpOptions);
+        }
+
+
+        consulterLivre(id: number): Observable<Livre> {
+          const url = `${this.apiURL}/${id}`;
+          return this.http.get<Livre>(url);
+          }
+
+          trierLivres() {
+            this.livres = this.livres.sort((liv1, liv2) => {
+              if (liv1.idLivre !== undefined && liv2.idLivre !== undefined) {
+                if (liv1.idLivre > liv2.idLivre) {
+                  return 1;
+                }
+                if (liv1.idLivre < liv2.idLivre) {
+                  return -1;
+                }
+              }
+              return 0;
+            });
+          }
+
+
+
+          updateLivre(liv :Livre) : Observable<Livre>
+            {
+                return this.http.put<Livre>(this.apiURL, liv, httpOptions);
+            }
+
+
+          listeGenres():Observable<Genre[]>{
+            return this.http.get<Genre[]>(this.apiURL+"/gen");
+            }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*export class LivreService {
 
   livre! : Livre;
   livres : Livre[]; //tableau de livres
@@ -77,4 +164,4 @@ export class LivreService {
     return this.genres.find(g => g.idGen === id)!;
   }
 
-}
+}*/

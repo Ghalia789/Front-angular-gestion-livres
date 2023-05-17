@@ -12,7 +12,7 @@ import { Genre } from '../model/genre.model';
 })
 export class UpdateLivreComponent implements OnInit {
   genres!: Genre[];
-  updatedGenId!: number;
+  updatedGenId?: number;
   currentLivre = new Livre();
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -21,19 +21,26 @@ export class UpdateLivreComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.genres = this.livreService.listeGenres();
     const livreId = this.activatedRoute.snapshot.params['id'];
-    console.log(livreId);
-    this.currentLivre = this.livreService.consulterLivre(livreId);
-    console.log(this.currentLivre);
-    this.updatedGenId = this.currentLivre.genre?.idGen || 0; // Use a default value if genre is undefined
+    this.livreService.listeGenres().
+    subscribe(gens => {this.genres = gens;
+      console.log(gens);
+      });
+
+
+      this.livreService.consulterLivre(livreId).
+      subscribe( liv =>{ this.currentLivre = liv;
+        this.updatedGenId =   this.currentLivre.genre?.idGen;
+      });
   }
 
 
   updateLivre() {
     //console.log(this.currentLivre);
-    this.currentLivre.genre = this.livreService.consulterGenre(this.updatedGenId);
-    this.livreService.updateLivre(this.currentLivre);
+    this.currentLivre.genre= this.genres.find(gen => gen.idGen == this.updatedGenId)!;
+    this.livreService.updateLivre(this.currentLivre).subscribe(liv => {
     this.router.navigate(['/livres']); // Navigate back to the livres list
+  }
+  );
   }
 }

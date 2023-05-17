@@ -11,22 +11,27 @@ import { Genre } from '../model/genre.model';
 export class AddLivreComponent implements OnInit {
 
   newLivre = new Livre();
-  genres! : Genre[];
+  genres!: Genre[];
   newIdGen!: number;
-  newGenre! : Genre;
+  newGenre!: Genre;
   constructor(private livreService: LivreService,
-    private router :Router) {
-    this.genres = this.livreService.listeGenres();
+    private router: Router) {
   }
 
   ngOnInit(): void {
-
+    this.livreService.listeGenres().
+      subscribe(gens => {
+        this.genres = gens;
+        console.log(gens);
+      });
   }
   addLivre() {
-    this.newGenre = this.livreService.consulterGenre(this.newIdGen);
-    this.newLivre.genre = this.newGenre;
-    this.livreService.ajouterLivre(this.newLivre);
-    this.router.navigate(['livres']);
+    this.newLivre.genre = this.genres.find(gen => gen.idGen == this.newIdGen)!;
+    this.livreService.ajouterLivre(this.newLivre)
+      .subscribe(liv => {
+        console.log(liv);
+        this.router.navigate(['livres']);
+      });
   }
 
 
