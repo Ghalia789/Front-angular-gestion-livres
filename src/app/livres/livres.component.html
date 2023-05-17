@@ -6,6 +6,7 @@
           <th>Id</th>
           <th>Titre</th>
           <th>Auteur</th>
+          <th>Genre</th>
           <th>Prix</th>
           <th>Quantite en stock</th>
           <th>Date de Publication</th>
@@ -15,6 +16,7 @@
             <td>{{livre.idLivre}}</td>
             <td>{{livre.titreLivre}}</td>
             <td>{{livre.auteurLivre}}</td>
+            <td>{{livre.genre?.nomGen}}</td>
             <td>{{livre.prixLivre}}</td>
             <td>{{livre.quantiteStock}}</td>
             <td>{{livre.datePublication| date:'dd/MM/yyyy'}}</td>
@@ -22,7 +24,7 @@
               <a class="btn btn-danger" (click)="supprimerLivre(livre)">Supprimer</a>
             </td>
             <td>
-              <a class="btn btn-success" [routerLink]="['/updateLivre',livre.idLivre]">Modifier</a>
+              <a class="btn btn-success" [routerLink]="'/update-livre/'+livre.idLivre">Modifier</a>
             </td>
           </tr>
         </tbody>

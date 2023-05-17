@@ -1,3 +1,5 @@
+import { Genre } from "./genre.model";
+
 export class Livre {
   idLivre? : number;
   auteurLivre? : string;
@@ -5,4 +7,5 @@ export class Livre {
   prixLivre? : number;
   quantiteStock? : number;
   titreLivre? : string;
+  genre?: Genre;
   }

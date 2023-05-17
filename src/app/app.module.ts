@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { LivresComponent } from './livres/livres.component';
 import { AddLivreComponent } from './add-livre/add-livre.component';
 import { UpdateLivreComponent } from './update-livre/update-livre.component';
+import { LivreService } from './service/livre.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { UpdateLivreComponent } from './update-livre/update-livre.component';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [],
+  providers: [LivreService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
