@@ -77,6 +77,15 @@ export class LivreService {
             return this.http.get<GenreWrapper>(this.apiURLGen);
             }
 
+            rechercherParGenre(idGen: number):Observable< Livre[]> {
+              const url = `${this.apiURL}/livresgen/${idGen}`;
+              return this.http.get<Livre[]>(url);
+              }
+
+            rechercherParTitre(titre : string): Observable< Livre[]> {
+              const url = `${this.apiURL}/livsByTitre/${titre}`;
+              return this.http.get<Livre[]>(url);
+            }
 
 }
 

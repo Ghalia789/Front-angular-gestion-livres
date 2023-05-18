@@ -8,12 +8,16 @@ import { AddLivreComponent } from './add-livre/add-livre.component';
 import { UpdateLivreComponent } from './update-livre/update-livre.component';
 import { LivreService } from './service/livre.service';
 import {HttpClientModule } from '@angular/common/http';
+import { RechercheParGenreComponent } from './recherche-par-genre/recherche-par-genre.component';
+import { RechercheParTitreComponent } from './recherche-par-titre/recherche-par-titre.component';
 @NgModule({
   declarations: [
     AppComponent,
     LivresComponent,
     AddLivreComponent,
-    UpdateLivreComponent
+    UpdateLivreComponent,
+    RechercheParGenreComponent,
+    RechercheParTitreComponent
   ],
   imports: [
     BrowserModule,
