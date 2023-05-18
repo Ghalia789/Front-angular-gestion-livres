@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Livre } from '../model/livre.model';
 import { LivreService } from '../service/livre.service';
 import { Genre } from '../model/genre.model';
+import { GenreWrapper } from '../model/GenreWrapped';
+
 @Component({
   selector: 'app-add-livre',
   templateUrl: './add-livre.component.html',
@@ -19,12 +21,15 @@ export class AddLivreComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.livreService.listeGenres().
-      subscribe(gens => {
-        this.genres = gens;
-        console.log(gens);
+    this.livreService.listeGenres()
+      .subscribe((genreWrapper: GenreWrapper) => {
+        console.log(genreWrapper);
+        this.genres = genreWrapper._embedded.genres;
       });
   }
+
+
+
   addLivre() {
     this.newLivre.genre = this.genres.find(gen => gen.idGen == this.newIdGen)!;
     this.livreService.ajouterLivre(this.newLivre)

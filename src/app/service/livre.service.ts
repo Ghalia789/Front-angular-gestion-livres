@@ -3,6 +3,7 @@ import { Livre } from '../model/livre.model';
 import { Genre } from '../model/genre.model';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { GenreWrapper } from '../model/GenreWrapped';
 
 const httpOptions = {
 headers: new HttpHeaders( {'Content-Type': 'application/json'} )
@@ -14,6 +15,7 @@ headers: new HttpHeaders( {'Content-Type': 'application/json'} )
 })
 export class LivreService {
   apiURL: string = 'http://localhost:8080/livres/api';
+  apiURLGen: string ='http://localhost:8080/livres/gen'
   livres : Livre[]; //un tableau de Livres
   //livre! : Livre;
 
@@ -71,8 +73,8 @@ export class LivreService {
             }
 
 
-          listeGenres():Observable<Genre[]>{
-            return this.http.get<Genre[]>(this.apiURL+"/gen");
+          listeGenres():Observable<GenreWrapper>{
+            return this.http.get<GenreWrapper>(this.apiURLGen);
             }
 
 

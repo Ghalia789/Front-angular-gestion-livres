@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LivreService } from '../service/livre.service';
 import { Livre } from '../model/livre.model';
 import { Genre } from '../model/genre.model';
+import { GenreWrapper } from '../model/GenreWrapped';
 
 @Component({
   selector: 'app-update-livre',
@@ -22,17 +23,18 @@ export class UpdateLivreComponent implements OnInit {
 
   ngOnInit(): void {
     const livreId = this.activatedRoute.snapshot.params['id'];
-    this.livreService.listeGenres().
-    subscribe(gens => {this.genres = gens;
-      console.log(gens);
-      });
 
+    this.livreService.listeGenres().subscribe((genreWrapper: GenreWrapper) => {
+      console.log(genreWrapper);
+      this.genres = genreWrapper._embedded.genres;
+    });
 
-      this.livreService.consulterLivre(livreId).
-      subscribe( liv =>{ this.currentLivre = liv;
-        this.updatedGenId =   this.currentLivre.genre?.idGen;
-      });
+    this.livreService.consulterLivre(livreId).subscribe((liv: Livre) => {
+      this.currentLivre = liv;
+      this.updatedGenId = this.currentLivre.genre?.idGen;
+    });
   }
+
 
 
   updateLivre() {
