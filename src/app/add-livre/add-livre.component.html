@@ -14,8 +14,8 @@
     </div>
     <div class="col-sm-4 col-md-4 col-lg-4"> <label>Genres</label> <select class="form-control form-control-lg"
         id="idGen" name="idGen" [(ngModel)]="newIdGen">
-        <option *ngFor="let gen of genres" [value]="gen.idGen">
-          {{gen.nomGen}}
+        <option *ngFor="let genre of genres" [value]="genre.idGen">
+          {{genre.nomGen}}
         </option>
       </select>
     </div>
