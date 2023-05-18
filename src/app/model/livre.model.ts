@@ -6,6 +6,6 @@ export class Livre {
   datePublication? : Date;
   prixLivre? : number;
   quantiteStock? : number;
-  titreLivre? : string;
+  titreLivre! : string;
   genre?: Genre;
   }

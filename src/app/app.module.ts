@@ -10,6 +10,7 @@ import { LivreService } from './service/livre.service';
 import {HttpClientModule } from '@angular/common/http';
 import { RechercheParGenreComponent } from './recherche-par-genre/recherche-par-genre.component';
 import { RechercheParTitreComponent } from './recherche-par-titre/recherche-par-titre.component';
+import { SearchFilterPipe } from './search-filter.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +18,8 @@ import { RechercheParTitreComponent } from './recherche-par-titre/recherche-par-
     AddLivreComponent,
     UpdateLivreComponent,
     RechercheParGenreComponent,
-    RechercheParTitreComponent
+    RechercheParTitreComponent,
+    SearchFilterPipe
   ],
   imports: [
     BrowserModule,

@@ -3,10 +3,9 @@
     <div class="card-body">
       <form class="form-inline">
         <div class="form-group mx-sm-3 mb-2 mt-2 ">
-          <label>Titre Livre</label>
-          <input type="text" class="form-control" [(ngModel)]="titreLivre" name="titreLivre" class="form-control">
-          <button type="submit" (click)="rechercherLivs()" class="btn btn-primary mb-2 ml-2">Rechercher</button>
-      </div>
+          <label>Titre Livre en tapant</label>
+          <input #titreLivre [(ngModel)]="searchTerm" name="searchTerm" class="form-control" >
+        </div>
       </form>
       <table class="table table-striped">
         <tr>
@@ -18,7 +17,7 @@
           <th>Quantite en stock</th>
           <th>Date de Publication</th>
         </tr>
-        <tbody *ngFor="let livre of livres">
+        <tbody *ngFor="let livre of livres | searchFilter: searchTerm">
           <tr>
             <td>{{livre.idLivre}}</td>
             <td>{{livre.titreLivre}}</td>
